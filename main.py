@@ -5,17 +5,12 @@ from telegram.ext import Application, MessageHandler, ContextTypes, filters
 TOKEN = os.getenv("TELEGRAM_TOKEN")
 
 async def cevap(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    text = update.message.text.lower()
-
-    if text == "selam":
+    if update.message.text.lower() == "selam":
         await update.message.reply_text("selam")
 
 app = Application.builder().token(TOKEN).build()
 
-app.add_handler(
-    MessageHandler(filters.TEXT & ~filters.COMMAND, cevap)
-)
+app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, cevap))
 
-print("Bot aktif!")
-
+print("Bot aktif")
 app.run_polling()
